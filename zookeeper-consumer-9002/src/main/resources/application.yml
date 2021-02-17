@@ -1,0 +1,10 @@
+server:
+  port: 9002
+  servlet:
+    context-path: /zookeeper-consumer
+spring:
+  application:
+    name: zookeeper-consumer-9002
+  cloud:
+    zookeeper:
+      connect-string: 127.0.0.1:2181

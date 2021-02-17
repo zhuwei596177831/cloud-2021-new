@@ -1,0 +1,13 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /zookeeper-provider
+spring:
+  application:
+    name: zookeeper-provider-9001
+  cloud:
+    zookeeper:
+      connect-string: 127.0.0.1:2181
+      #disable the Zookeeper Discovery Client 关闭服务发现 只注册服务
+#      discovery:
+#        enabled: false

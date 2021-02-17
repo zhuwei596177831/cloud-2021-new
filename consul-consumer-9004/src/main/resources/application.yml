@@ -1,0 +1,17 @@
+server:
+  port: 9004
+  servlet:
+    context-path: /consul-consumer
+spring:
+  application:
+    name: consul-consumer-9004
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+    #开启后 RestTemplate+服务名 OpenFeign调用失败
+    loadbalancer:
+      ribbon:
+        enabled: false
