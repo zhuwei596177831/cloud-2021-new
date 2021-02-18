@@ -1,0 +1,16 @@
+server:
+  port: 9007
+  servlet:
+    context-path: /sentinel-9007
+spring:
+  application:
+    name: sentinel-9007
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        service: ${spring.application.name}
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 127.0.0.1:8080

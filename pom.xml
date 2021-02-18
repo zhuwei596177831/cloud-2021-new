@@ -12,6 +12,9 @@
         <module>zookeeper-consumer-9002</module>
         <module>consul-provider-9003</module>
         <module>consul-consumer-9004</module>
+        <module>nacos-provider-9005</module>
+        <module>nacos-consumer-9006</module>
+        <module>sentinel-9007</module>
     </modules>
     <packaging>pom</packaging>
     <!--    <parent>-->
@@ -70,8 +73,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
     </dependencies>
 
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

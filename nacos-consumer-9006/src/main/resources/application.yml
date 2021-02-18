@@ -1,0 +1,16 @@
+server:
+  port: 9006
+  servlet:
+    context-path: /nacos-consumer-9006
+spring:
+  application:
+    name: nacos-consumer-9006
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        service: ${spring.application.name}
+        ip: 127.0.0.1
+        port: ${server.port}
+      config:
+        group: zww_group

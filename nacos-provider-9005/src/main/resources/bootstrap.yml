@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: nacos-provider-9005
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        service: ${spring.application.name}
+        ip: 127.0.0.1
+        port: ${server.port}
+      #nacos config dataId格式： ${prefix} - ${spring.profiles.active} . ${file-extension}
+      config:
+        group: zww_config_group
+        name: ${spring.application.name}
+        prefix: ${spring.application.name}
+        file-extension: yml
+        #nacos config 共享配置
+        shared-configs:
+          - dataId: shared-provider-1.properties
+            group: shared-provider-1-group
+            refresh: true
+          - dataId: shared-provider-2.properties
+            group: shared-provider-2-group
+            refresh: true
+        #extensional config
+#        extension-configs:

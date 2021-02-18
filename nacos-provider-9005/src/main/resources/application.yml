@@ -1,0 +1,8 @@
+#server:
+#  port: 9005
+#  servlet:
+#    context-path: /nacos-provider-9005
+config:
+  provider:
+    address: hefei
+    email: 596177831@qq.com
