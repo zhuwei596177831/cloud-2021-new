@@ -1,0 +1,32 @@
+server:
+  port: 9008
+#  servlet:
+#    context-path: /sentinel-zuul-9008
+spring:
+  application:
+    name: sentinel-zuul-9008
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        service: ${spring.application.name}
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 127.0.0.1:8080
+      #sentinel-zuul
+      filter:
+        enabled: false
+zuul:
+  prefix: /api
+  ignored-services: '*'
+  routes:
+    nacosProvider:
+      path: /nacosProvider/**
+      serviceId: nacos-provider-9005
+    nacosConsumer:
+      path: /nacosConsumer/**
+      serviceId: nacos-consumer-9006
+    sentinel9007:
+      path: /sentinel9007/**
+      serviceId: sentinel-9007

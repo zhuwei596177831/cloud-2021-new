@@ -1,5 +1,7 @@
 package com.cloud.nacos.learning.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
@@ -44,13 +47,18 @@ public class NacosProviderController {
     private String email;
     @Value("${config.provider.address}")
     private String address;
+    @Autowired
+    HttpServletRequest httpServletRequest;
 
 
     @GetMapping("/serviceUrl")
     public List<ServiceInstance> serviceUrl() {
+        System.out.println("header token：" + httpServletRequest.getHeader("token"));
+        System.out.println("header nacos-provider：" + httpServletRequest.getHeader("nacos-provider"));
         return discoveryClient.getInstances("nacos-provider-9005");
     }
 
+    @SentinelResource(value = "getNacosProviderResult", blockHandler = "getNacosProviderResultBlockHandler", fallback = "getNacosProviderResultFallback")
     @GetMapping("/provider/{string}")
     public Map<String, String> getResult(@PathVariable(value = "string") String value) {
         Map<String, String> map = new HashMap<>();
@@ -62,6 +70,15 @@ public class NacosProviderController {
         map.put("sharedName01", sharedName01);
         map.put("sharedName02", sharedName02);
         return map;
+    }
+
+    public String getNacosProviderResultBlockHandler(String value, BlockException e) {
+        e.printStackTrace();
+        return "getNacosProviderResult BlockHandler";
+    }
+
+    public String getNacosProviderResultFallback(String value, Throwable throwable) {
+        return "getNacosProviderResult fallback";
     }
 
 }

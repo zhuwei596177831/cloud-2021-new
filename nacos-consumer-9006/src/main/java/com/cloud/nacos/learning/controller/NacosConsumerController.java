@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -31,9 +32,13 @@ public class NacosConsumerController {
     private String appName;
     @Autowired
     ProviderFeignClient providerFeignClient;
+    @Autowired
+    HttpServletRequest httpServletRequest;
 
     @GetMapping("/getResult")
     public Map getResult() {
+        System.out.println("header token：" + httpServletRequest.getHeader("token"));
+        System.out.println("header nacos-consumer：" + httpServletRequest.getHeader("nacos-consumer"));
         List<ServiceInstance> instances = discoveryClient.getInstances("nacos-provider-9005");
 //        List<ServiceInstance> instances = discoveryClient.getInstances("nacos-consumer-9006");
         //Access through the combination of LoadBalanceClient and RestTemplate

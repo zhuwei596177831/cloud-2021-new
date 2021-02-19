@@ -1,0 +1,29 @@
+server:
+  port: 9009
+spring:
+  application:
+    name: sentinel-gateway-9009
+  cloud:
+    #    nacos:
+    #      discovery:
+    #        server-addr: 127.0.0.1:8848
+    #        service: ${spring.application.name}
+    gateway:
+      routes:
+        - id: nacos-provider-9005
+          uri: http://127.0.0.1:9005
+          predicates:
+            - Path=/nacos-provider-9005/**
+          filters:
+            - AddRequestHeader=nacos-provider,nacosProvider9005
+        - id: nacos-consumer-9006
+          uri: http://127.0.0.1:9006
+          predicates:
+            - Path=/nacos-consumer-9006/**
+      default-filters:
+        - AddRequestHeader=token,sentinel-gateway-9009
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
