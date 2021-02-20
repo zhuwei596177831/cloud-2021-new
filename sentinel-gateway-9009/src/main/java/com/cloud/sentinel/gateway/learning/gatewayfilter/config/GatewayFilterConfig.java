@@ -1,56 +1,55 @@
 package com.cloud.sentinel.gateway.learning.gatewayfilter.config;
 
-import com.cloud.sentinel.gateway.learning.gatewayfilter.CustomConsumerGatewayFilter;
-import org.springframework.cloud.gateway.route.Route;
+import com.cloud.sentinel.gateway.learning.gatewayfilter.CustomSentinel9007Filter;
+import com.cloud.sentinel.gateway.learning.gatewayfilter.MyPostGatewayFilterFactory;
+import com.cloud.sentinel.gateway.learning.gatewayfilter.MyPreGatewayFilterFactory;
 import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.GatewayFilterSpec;
-import org.springframework.cloud.gateway.route.builder.PredicateSpec;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
-import org.springframework.cloud.gateway.route.builder.UriSpec;
+import org.springframework.cloud.gateway.support.RouteMetadataUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.function.Function;
-
 /**
  * @author 朱伟伟
- * @date 2021-02-19 17:49:41
+ * @date 2021-02-20 10:35:59
  * @description
  */
 @Configuration(proxyBeanMethods = false)
 public class GatewayFilterConfig {
 
     /**
-     * @param builder:
+     * @param routeBuilder:
      * @author: 朱伟伟
-     * @date: 2021-02-19 17:50
-     * @description: 绑定CustomConsumerGatewayFilter到指定路由
+     * @date: 2021-02-20 10:42
+     * @description: 自定义gatewayfilter 用于sentinel-9007
      **/
     @Bean
-    public RouteLocator customerRouteLocator(RouteLocatorBuilder builder) {
-//        return builder.routes().route(new Function<PredicateSpec, Route.AsyncBuilder>() {
-//            @Override
-//            public Route.AsyncBuilder apply(PredicateSpec predicateSpec) {
-//                return predicateSpec.path("/nacos-consumer-9006/**").filters(new Function<GatewayFilterSpec, UriSpec>() {
-//                    @Override
-//                    public UriSpec apply(GatewayFilterSpec gatewayFilterSpec) {
-//                        return gatewayFilterSpec.filter(new CustomConsumerGatewayFilter()).stripPrefix(0);
-//                    }
-//                }).uri("lb://CustomConsumerGatewayFilter").order(0).id("CustomConsumerGatewayFilter");
-//
-//            }
-//        }).build();
-        return builder.routes()
-                .route(r ->
-                        r.path("/nacos-consumer-9006/**")
-                                .filters(
-                                        f -> f.stripPrefix(1)
-                                                .filters(new CustomConsumerGatewayFilter())
-                                )
-                                .uri("lb://nacos-consumer-9006")
+    public RouteLocator customSentinel9007RouteLocator(RouteLocatorBuilder routeBuilder) {
+        return routeBuilder.routes()
+                .route("sentinel-9007",
+                        r -> r.path("/sentinel-9007/**")
+                                .filters(f -> f.filter(new CustomSentinel9007Filter()))
+                                .uri("http://127.0.0.1:9007")
+                                .metadata(RouteMetadataUtils.RESPONSE_TIMEOUT_ATTR, 1000)
+                                .metadata(RouteMetadataUtils.CONNECT_TIMEOUT_ATTR, 3000)
                 )
+//                .route(r -> r.path("/image/png")
+//                        .filters(f ->
+//                                f.addResponseHeader("X-TestHeader", "foobar"))
+//                        .uri("http://httpbin.org:80")
+//                )
                 .build();
     }
+
+//    @Bean
+//    public MyPreGatewayFilterFactory myPreGatewayFilterFactory() {
+//        return new MyPreGatewayFilterFactory();
+//    }
+//
+//    @Bean
+//    public MyPostGatewayFilterFactory myPostGatewayFilterFactory() {
+//        return new MyPostGatewayFilterFactory();
+//    }
 
 
 }

@@ -4,11 +4,17 @@ spring:
   application:
     name: sentinel-gateway-9009
   cloud:
-    #    nacos:
-    #      discovery:
-    #        server-addr: 127.0.0.1:8848
-    #        service: ${spring.application.name}
     gateway:
+      #      default-filters:
+      #        - AddRequestHeader=token,sentinel-gateway-9009
+      #global http timeouts
+      httpclient:
+        # default is 45s
+        connect-timeout: 10000
+        response-timeout: 5s
+#        wiretap: true
+#      httpserver:
+#        wiretap: true
       routes:
         - id: nacos-provider-9005
           uri: http://127.0.0.1:9005
@@ -20,10 +26,23 @@ spring:
           uri: http://127.0.0.1:9006
           predicates:
             - Path=/nacos-consumer-9006/**
-      default-filters:
-        - AddRequestHeader=token,sentinel-gateway-9009
+          metadata:
+            testMetadata: zhuweiwei
+            optionName: zww
+            # Per-route http timeouts
+            response-timeout: 1000
+            connect-timeout: 3000
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+#        include: gateway
+logging:
+  file:
+    name: gateway-log.log
+    max-size: 100MB
+    max-history: 30
+#  level:
+#    reactor:
+#      netty: debug

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -36,12 +37,29 @@ public class SentinelController {
     LoadBalancerClient loadBalancerClient;
     @Value("${spring.application.name}")
     private String appName;
+    @Autowired
+    HttpServletRequest httpServletRequest;
 
     @GetMapping("/testSentinel")
 //    @SentinelResource(value = "testSentinel", blockHandler = "testSentinelBlockHandler", fallback = "testSentinelFallback")
     public String testSentinel() {
 //        return "Hello Sentinel";
         return sentinelService.testSentinel();
+    }
+
+    @GetMapping("/testDegradeRule")
+    @SentinelResource(value = "testDegradeRule", fallback = "testDegradeRuleFallback")
+    public String testDegradeRule() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "testDegradeRule";
+    }
+
+    public String testDegradeRuleFallback() {
+        return "testDegradeRuleFallback";
     }
 
 //    public String testSentinelBlockHandler(BlockException e) {
@@ -55,6 +73,8 @@ public class SentinelController {
 
     @GetMapping("/getResultByOpenFeign")
     public Map getResultByOpenFeign() {
+        String sentinelToken = httpServletRequest.getHeader("sentinelToken");
+        System.out.println("sentinelToken:" + sentinelToken);
         return sentinelFeignClient.getResult("朱伟伟");
     }
 

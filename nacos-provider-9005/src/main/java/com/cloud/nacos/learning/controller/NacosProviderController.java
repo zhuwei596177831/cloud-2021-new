@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,8 +54,11 @@ public class NacosProviderController {
 
     @GetMapping("/serviceUrl")
     public List<ServiceInstance> serviceUrl() {
-        System.out.println("header token：" + httpServletRequest.getHeader("token"));
-        System.out.println("header nacos-provider：" + httpServletRequest.getHeader("nacos-provider"));
+        Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            System.out.println(headerName + "：" + httpServletRequest.getHeader(headerName));
+        }
         return discoveryClient.getInstances("nacos-provider-9005");
     }
 
