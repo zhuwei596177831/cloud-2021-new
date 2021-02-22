@@ -14,9 +14,10 @@
         <module>consul-consumer-9004</module>
         <module>nacos-provider-9005</module>
         <module>nacos-consumer-9006</module>
-        <module>sentinel-9007</module>
+        <module>sentinel-provider-9007</module>
         <module>sentinel-zuul-9008</module>
         <module>sentinel-gateway-9009</module>
+        <module>sentinel-consumer-9017</module>
     </modules>
     <packaging>pom</packaging>
     <!--    <parent>-->
@@ -39,6 +40,7 @@
         <druid.boot.version>1.2.4</druid.boot.version>
         <mybatis.plus.extension.version>3.3.1</mybatis.plus.extension.version>
         <pagehelper.version>5.1.10</pagehelper.version>
+        <sentinel-datasource-nacos.version>1.8.0</sentinel-datasource-nacos.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -63,14 +65,15 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-datasource-nacos</artifactId>
+                <version>${sentinel-datasource-nacos.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-web</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

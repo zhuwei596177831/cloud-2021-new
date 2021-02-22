@@ -1,0 +1,60 @@
+server:
+  port: 9007
+  servlet:
+    context-path: /sentinel-provider-9007
+spring:
+  application:
+    name: sentinel-provider-9007
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        service: ${spring.application.name}
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 127.0.0.1:8080
+      #Dynamic Data Source Support sentinel配置存储在动态数据源
+      datasource:
+        #nacos
+        #流量控制
+        flow:
+          nacos:
+            serverAddr: 127.0.0.1:8848
+            groupId: nacos-datasource-config
+            dataId: ${spring.application.name}-flow
+            dataType: json
+            ruleType: flow
+        #熔断降级
+        degrade:
+          nacos:
+            serverAddr: 127.0.0.1:8848
+            groupId: nacos-datasource-config
+            dataId: ${spring.application.name}-degrade
+            dataType: json
+            ruleType: degrade
+        #访问控制
+        authority:
+          nacos:
+            serverAddr: 127.0.0.1:8848
+            groupId: nacos-datasource-config
+            dataId: ${spring.application.name}-authority
+            dataType: json
+            ruleType: authority
+        #热点参数
+        param-flow:
+          nacos:
+            serverAddr: 127.0.0.1:8848
+            groupId: nacos-datasource-config
+            dataId: ${spring.application.name}-param-flow
+            dataType: json
+            ruleType: param-flow
+        #file
+        #zk
+        #apollo
+        #redis
+        #consul
+
+feign:
+  sentinel:
+    enabled: true

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sentinel-9007</artifactId>
+    <artifactId>sentinel-consumer-9017</artifactId>
 
     <dependencies>
         <dependency>
@@ -29,6 +29,5 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
-
 
 </project>

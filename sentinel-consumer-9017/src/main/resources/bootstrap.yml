@@ -1,10 +1,10 @@
 server:
-  port: 9007
+  port: 9017
   servlet:
-    context-path: /sentinel-9007
+    context-path: /sentinel-consumer-9017
 spring:
   application:
-    name: sentinel-9007
+    name: sentinel-consumer-9017
   cloud:
     nacos:
       discovery:

@@ -15,10 +15,10 @@ import org.springframework.web.client.RestTemplate;
  */
 @SpringBootApplication
 @EnableFeignClients(basePackages = {"com.cloud.sentinel.learning.openfeign"})
-public class SentinelApplication {
+public class SentinelProviderApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SentinelApplication.class, args);
+        SpringApplication.run(SentinelProviderApplication.class, args);
     }
 
     /**

@@ -26,8 +26,8 @@ public class GatewayFilterConfig {
     @Bean
     public RouteLocator customSentinel9007RouteLocator(RouteLocatorBuilder routeBuilder) {
         return routeBuilder.routes()
-                .route("sentinel-9007",
-                        r -> r.path("/sentinel-9007/**")
+                .route("sentinel-provider-9007",
+                        r -> r.path("/sentinel-provider-9007/**")
                                 .filters(f -> f.filter(new CustomSentinel9007Filter()))
                                 .uri("http://127.0.0.1:9007")
                                 .metadata(RouteMetadataUtils.RESPONSE_TIMEOUT_ATTR, 1000)

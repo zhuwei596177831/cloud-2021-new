@@ -18,7 +18,7 @@ import java.util.Map;
         path = "/nacos-provider-9005",
         fallback = SentinelFeignClientFallback.class,
         configuration = SentinelFeignClientConfig.class)
-public interface SentinelFeignClient {
+public interface SentinelProviderFeignClient {
 
     @GetMapping("/provider/{string}")
     Map<String, String> getResult(@PathVariable(value = "string") String value);

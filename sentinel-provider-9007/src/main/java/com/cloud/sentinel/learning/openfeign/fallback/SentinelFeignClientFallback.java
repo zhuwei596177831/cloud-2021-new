@@ -1,6 +1,6 @@
 package com.cloud.sentinel.learning.openfeign.fallback;
 
-import com.cloud.sentinel.learning.openfeign.SentinelFeignClient;
+import com.cloud.sentinel.learning.openfeign.SentinelProviderFeignClient;
 
 import java.util.Collections;
 import java.util.Map;
@@ -10,7 +10,7 @@ import java.util.Map;
  * @date 2021-02-19 09:04:14
  * @description
  */
-public class SentinelFeignClientFallback implements SentinelFeignClient {
+public class SentinelFeignClientFallback implements SentinelProviderFeignClient {
     @Override
     public Map<String, String> getResult(String value) {
         return Collections.singletonMap("msg", "SentinelFeignClientFallback");
