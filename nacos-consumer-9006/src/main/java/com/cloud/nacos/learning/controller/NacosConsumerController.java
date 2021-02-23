@@ -35,6 +35,8 @@ public class NacosConsumerController {
     ProviderFeignClient providerFeignClient;
     @Autowired
     HttpServletRequest httpServletRequest;
+    @Value("${server.port}")
+    private Integer port;
 
     @GetMapping("/getResult")
     public Map getResult() {
@@ -61,6 +63,11 @@ public class NacosConsumerController {
     @GetMapping("/getResultByOpenFeign")
     public Map getResultByOpenFeign() {
         return providerFeignClient.getResult("朱伟伟");
+    }
+
+    @GetMapping("/getPort")
+    public Integer getPort() {
+        return port;
     }
 
 

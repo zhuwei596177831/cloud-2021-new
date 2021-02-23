@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 朱伟伟
@@ -24,7 +21,7 @@ import java.util.Map;
  * @description
  */
 @RestController
-@RefreshScope
+//@RefreshScope
 public class NacosProviderController {
 
     @Autowired
@@ -34,6 +31,8 @@ public class NacosProviderController {
      */
     @Value("${config.provider.name}")
     private String name;
+    @Value("${server.port}")
+    private Integer port;
     /**
      * nacos config 共享配置
      */
@@ -84,5 +83,13 @@ public class NacosProviderController {
     public String getNacosProviderResultFallback(String value, Throwable throwable) {
         return "getNacosProviderResult fallback";
     }
+
+
+    @GetMapping("/getPort")
+    public Map<String, Integer> getPort() {
+        System.out.println(port);
+        return Collections.singletonMap("port", port);
+    }
+
 
 }
