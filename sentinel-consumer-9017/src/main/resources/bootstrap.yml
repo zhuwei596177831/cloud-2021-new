@@ -14,6 +14,7 @@ spring:
       transport:
         port: 8719
         dashboard: 127.0.0.1:8080
+#打开 Sentinel 对 Feign 的支持 支持@FeignClient的fallback等注解属性配置
 feign:
   sentinel:
     enabled: true

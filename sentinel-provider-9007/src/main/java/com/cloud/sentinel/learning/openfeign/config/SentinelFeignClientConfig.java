@@ -13,11 +13,6 @@ import org.springframework.context.annotation.Bean;
 public class SentinelFeignClientConfig {
 
     @Bean
-    public IRule iRule() {
-        return new RandomRule();
-    }
-
-    @Bean
     public SentinelFeignClientFallback sentinelFeignClientFallback() {
         return new SentinelFeignClientFallback();
     }

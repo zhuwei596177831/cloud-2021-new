@@ -150,9 +150,16 @@ public class SentinelProviderController {
         //Access through the combination of LoadBalanceClient and RestTemplate
         ServiceInstance serviceInstance = loadBalancerClient.choose("nacos-provider-9005");
 //        ServiceInstance serviceInstance = loadBalancerClient.choose("nacos-consumer-9006");
-        String path = String.format("http://%s:%s/nacos-provider-9005/provider/%s", serviceInstance.getHost(), serviceInstance.getPort(), "朱伟伟");
+//        String path = String.format("http://%s:%s/nacos-provider-9005/provider/%s", serviceInstance.getHost(), serviceInstance.getPort(), "朱伟伟");
+//        String path = "http://nacos-provider-9005/nacos-provider-9005/provider/dss";
+        String path = "http://127.0.0.1:9005/nacos-provider-9005/provider/dss";
         System.out.println("request path:" + path);
         return restTemplate.getForObject(path, Map.class);
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "test";
     }
 
 }
