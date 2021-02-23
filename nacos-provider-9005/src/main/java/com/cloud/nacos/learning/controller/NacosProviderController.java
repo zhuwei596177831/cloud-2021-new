@@ -21,7 +21,7 @@ import java.util.*;
  * @description
  */
 @RestController
-//@RefreshScope
+@RefreshScope
 public class NacosProviderController {
 
     @Autowired
