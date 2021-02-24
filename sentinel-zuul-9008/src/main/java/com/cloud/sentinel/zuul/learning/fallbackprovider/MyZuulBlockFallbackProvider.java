@@ -26,7 +26,7 @@ public class MyZuulBlockFallbackProvider implements ZuulBlockFallbackProvider {
         if (cause instanceof BlockException) {
             Map<String, Object> map = new HashMap<>(4);
             map.put("time", LocalDateTime.now());
-            map.put("msg", "Sentinel block exception");
+            map.put("msg", "Sentinel-zuul block exception");
             return new BlockResponse(HttpStatus.TOO_MANY_REQUESTS.value(), JSON.toJSONString(map), route);
         } else {
             return new BlockResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), route);

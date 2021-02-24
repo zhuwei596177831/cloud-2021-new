@@ -112,7 +112,7 @@ public class SentinelProviderController {
     @GetMapping("/testParamFlowRule/{goodsID}")
     @SentinelResource(value = "testParamFlowRule", blockHandler = "testParamFlowRuleFallback")
     public String testParamFlowRule(@PathVariable(value = "goodsID") String goodsID) {
-        return "testAuthorityRule";
+        return "testParamFlowRule";
     }
 
     public String testParamFlowRuleFallback(String goodsID, BlockException e) {

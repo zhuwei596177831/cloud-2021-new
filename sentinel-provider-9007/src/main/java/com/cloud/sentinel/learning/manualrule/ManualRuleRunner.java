@@ -31,27 +31,19 @@ import java.util.List;
 public class ManualRuleRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
-//        apiLoadRule();
-    }
-
-    /**
-     * @author: 朱伟伟
-     * @date: 2021-02-22 16:52
-     * @description: api编码方式添加sentinel配置
-     **/
-    private void apiLoadRule() {
         //流量控制规则
-        loadFlowRule();
+//        loadFlowRule();
 
         //熔断降级规则 (DegradeRule)
-        loadDegradeRule();
+//        loadDegradeRule();
 
         //访问控制规则 (AuthorityRule)
-        loadAuthorityRule();
+//        loadAuthorityRule();
 
         //热点参数规则
-        loadParamFlowRule();
+//        loadParamFlowRule();
     }
+
 
     /**
      * @author: 朱伟伟
