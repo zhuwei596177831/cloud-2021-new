@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sentinel-zuul</artifactId>
+    <artifactId>sentinel-zuul-9008</artifactId>
 
     <dependencies>
         <dependency>

@@ -162,4 +162,18 @@ public class SentinelProviderController {
         return "test";
     }
 
+    /**
+     * @param param:
+     * @author: 朱伟伟
+     * @date: 2021-02-25 11:07
+     * @description: sentinel-gateway 熔断测试 未测试通过
+     **/
+    @GetMapping("/testGatewaySentinelDegrade/{param}")
+    public String testGatewaySentinelDegrade(@PathVariable(value = "param") Integer param) {
+        if (param < 0) {
+            throw new RuntimeException("param不可为负");
+        }
+        return "testGatewaySentinelDegrade";
+    }
+
 }

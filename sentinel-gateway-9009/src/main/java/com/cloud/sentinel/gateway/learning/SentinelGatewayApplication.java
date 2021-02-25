@@ -1,11 +1,22 @@
 package com.cloud.sentinel.gateway.learning;
 
+import com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayFlowRule;
+import com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayRuleManager;
+import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.BlockRequestHandler;
+import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.DefaultBlockRequestHandler;
+import com.alibaba.csp.sentinel.slots.block.RuleConstant;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
-import org.springframework.cloud.gateway.support.RouteMetadataUtils;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author 朱伟伟
@@ -13,10 +24,32 @@ import org.springframework.context.annotation.Bean;
  * @description
  */
 @SpringBootApplication
-public class SentinelGatewayApplication {
+public class SentinelGatewayApplication implements ApplicationRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(SentinelGatewayApplication.class, args);
+    }
+
+    @Bean
+    public BlockRequestHandler blockRequestHandler() {
+        return new DefaultBlockRequestHandler();
+    }
+
+    /**
+     * @param args:
+     * @author: 朱伟伟
+     * @date: 2021-02-25 10:20
+     * @description:
+     **/
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        //// TODO: 2021-02-25 网关限流失效 暂未找到原因?
+//        Set<GatewayFlowRule> rules = new HashSet<>();
+//        GatewayFlowRule rule = new GatewayFlowRule("gateway-sentinel-provider-9007");
+//        rule.setCount(1);
+//        rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
+//        rules.add(rule);
+//        GatewayRuleManager.loadRules(rules);
     }
 
     /**

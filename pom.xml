@@ -18,6 +18,8 @@
         <module>sentinel-zuul-9008</module>
         <module>sentinel-gateway-9009</module>
         <module>sentinel-consumer-9017</module>
+        <module>rocketmq-producer-9010</module>
+        <module>rocketmq-consumer-9011</module>
     </modules>
     <packaging>pom</packaging>
     <!--    <parent>-->
@@ -45,6 +47,7 @@
         <mybatis.plus.extension.version>3.3.1</mybatis.plus.extension.version>
         <pagehelper.version>5.1.10</pagehelper.version>
         <sentinel-datasource-nacos.version>1.8.0</sentinel-datasource-nacos.version>
+        <rocketmq-client.version>4.3.0</rocketmq-client.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -73,6 +76,11 @@
                 <groupId>com.alibaba.csp</groupId>
                 <artifactId>sentinel-datasource-nacos</artifactId>
                 <version>${sentinel-datasource-nacos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${rocketmq-client.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

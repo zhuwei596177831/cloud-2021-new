@@ -51,8 +51,9 @@ spring:
       transport:
         port: 8719
         dashboard: 127.0.0.1:8080
-      #gateway整合sentinel Dynamic Data Source Support sentinel配置存储在动态数据源
+          #gateway整合sentinel Dynamic Data Source Support sentinel配置存储在动态数据源
       datasource:
+        #以下暂未测试通过？？？
         #网关流量控制
         flow:
           nacos:
