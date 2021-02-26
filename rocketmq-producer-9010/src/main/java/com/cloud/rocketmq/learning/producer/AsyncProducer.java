@@ -25,7 +25,7 @@ public class AsyncProducer {
         //异步发送失败重试次数，异步重试不会选择其他broker，仅在同一个broker上做重试，不保证消息不丢。
         producer.setRetryTimesWhenSendAsyncFailed(0);
 
-        int messageCount = 100;
+        int messageCount = 5;
         // 根据消息数量实例化倒计时计算器
         final CountDownLatch2 countDownLatch = new CountDownLatch2(messageCount);
         for (int i = 0; i < messageCount; i++) {

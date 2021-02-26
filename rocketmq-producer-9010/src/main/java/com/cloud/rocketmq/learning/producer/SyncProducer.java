@@ -17,12 +17,12 @@ public class SyncProducer {
         DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
         // 设置NameServer的地址
         producer.setNamesrvAddr("localhost:9876");
-        // 启动Producer实例
-        producer.start();
         //同步发送失败重投次数，默认为2，因此生产者会最多尝试发送retryTimesWhenSendFailed + 1次。
         // 不会选择上次失败的broker，尝试向其他broker发送，最大程度保证消息不丢。超过重投次数，抛出异常，由客户端保证消息不丢。
         // 当出现RemotingException、MQClientException和部分MQBrokerException时会重投。
         producer.setRetryTimesWhenSendFailed(0);
+        // 启动Producer实例
+        producer.start();
         for (int i = 0; i < 1; i++) {
             // 创建消息，并指定Topic，Tag和消息体
             Message msg = new Message("TopicTest", "TagA",
