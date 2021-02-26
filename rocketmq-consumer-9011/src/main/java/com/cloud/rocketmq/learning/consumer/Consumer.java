@@ -5,6 +5,8 @@ import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import org.apache.rocketmq.common.message.Message;
+import org.apache.rocketmq.common.message.MessageConst;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 
@@ -29,6 +31,18 @@ public class Consumer {
         consumer.subscribe("TopicTest", "TagA");
         // 注册回调实现类来处理从broker拉取回来的消息
         consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
+
+//            long offset = msgs.get(0).getQueueOffset();
+//            String maxOffset =
+//                    msgs.get(0).getProperty(MessageConst.PROPERTY_MAX_OFFSET);
+//            long diff = Long.parseLong(maxOffset) - offset;
+//            if (diff > 100000) {
+//                // TODO 消息堆积情况的特殊处理
+//                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+//            }
+//            // TODO 正常消费过程
+//            return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+
             for (MessageExt msg : msgs) {
 //                System.out.println(msg);
                 System.out.println(new String(msg.getBody(), StandardCharsets.UTF_8));

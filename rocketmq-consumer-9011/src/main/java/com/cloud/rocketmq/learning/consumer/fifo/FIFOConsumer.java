@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2021-02-25 16:11:44
  * @description
  */
-public class ConsumerInOrder {
+public class FIFOConsumer {
     public static void main(String[] args) throws Exception {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("please_rename_unique_group_name_fifo");
         consumer.setNamesrvAddr("127.0.0.1:9876");

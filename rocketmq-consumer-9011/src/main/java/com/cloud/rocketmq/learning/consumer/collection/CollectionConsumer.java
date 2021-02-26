@@ -21,6 +21,8 @@ public class CollectionConsumer {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("collectionProducer");
         consumer.setNamesrvAddr("127.0.0.1:9876");
         consumer.subscribe("TopicTest", "*");
+        //批量方式消费
+        consumer.setConsumeMessageBatchMaxSize(5);
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
