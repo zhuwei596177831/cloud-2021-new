@@ -20,6 +20,7 @@
         <module>sentinel-consumer-9017</module>
         <module>rocketmq-producer-9010</module>
         <module>rocketmq-consumer-9011</module>
+        <module>spring-cloud-stream-9012</module>
     </modules>
     <packaging>pom</packaging>
     <!--    <parent>-->

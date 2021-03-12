@@ -1,0 +1,10 @@
+server:
+  port: 9012
+spring:
+  application:
+    name: spring-cloud-stream-9012
+  cloud:
+    stream:
+      bindings:
+        input:
+          group: spring-cloud-stream-9012
